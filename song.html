@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Special Message</title>
+  <style>
+    body {
+      margin:0; height:100vh; display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,#ff758c,#ff7eb3,#a18cd1);
+      background-size:600% 600%;
+      animation:bgShift 15s ease infinite;
+      overflow:hidden; font-family:'Segoe UI',sans-serif; color:white;
+    }
+    @keyframes bgShift {
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+    .card {
+      background:rgba(255,255,255,0.15);
+      padding:40px; border-radius:20px; backdrop-filter:blur(12px);
+      box-shadow:0 12px 40px rgba(0,0,0,0.3);
+      text-align:center; z-index:10; animation:fadeIn 2s ease forwards;
+    }
+    h1 { font-size:36px; margin-bottom:16px; color:#ffe1ec; }
+    #message { font-size:28px; font-weight:bold; min-height:80px; color:#fff; }
+    @keyframes fadeIn { from{opacity:0; transform:scale(0.9);} to{opacity:1; transform:scale(1);} }
+    .btns { margin-top:20px; display:flex; gap:20px; justify-content:center; flex-wrap: wrap; }
+    button {
+      background:#ff4d6d; border:none; padding:12px 24px; border-radius:30px;
+      font-size:18px; color:white; cursor:pointer; transition:0.3s;
+    }
+    button:hover { background:#ff8fa3; }
+    .playBtn {
+      margin-top:20px; background:#ff99ac; font-size:20px;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%{transform:scale(1);}
+      50%{transform:scale(1.1);}
+      100%{transform:scale(1);}
+    }
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      color: rgba(255,200,220,0.9);
+      animation: floatUp 8s linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform:translateY(100vh) scale(0.5); opacity:1; }
+      100% { transform:translateY(-10vh) scale(1.2); opacity:0; }
+    }
+    .note {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    
+    <p id="message">💖 Dear Kavya 💕 <br>
+🌹 “A small gift from my heart to yours, with endless love.” 💌
+I can't explain my love in words 😍... but what I feel is that love is a continuous journey 🚶‍♂️❤️🚶‍♀️, not just a moment in time ⏳💫.
+
+"Don't ever doubt whether I will be with you or not 💕... I will always be with you, for life long 🌎❤️✨."
+
+So, do you love me? 💍🧎‍♂💕</p>
+    <div class="btns">
+      <button onclick="sayYes()">Yes 💕</button>
+      <button onclick="sayNo()">No 😢</button>
+    </div>
+    <p class="note">Your answer will open WhatsApp 📲</p>
+
+    <!-- Romantic Love Song -->
+    <audio id="music" loop autoplay>
+  <source src="Parichayamila(KoshalWorld.Com).mp3" type="audio/mp3" type="audio/mpeg"> 
+  
+</audio>
+
+    <p style="font-size:12px;opacity:0.7;">If music doesn’t start, tap play 🎶</p>
+    <button onclick="document.getElementById('music').play()"> ▶️Play Music</button>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script>
+    const phoneNumber = "919618554915"; 
+
+    function playMusic(){
+      const music = document.getElementById("music");
+      music.volume = 0;
+      music.play().catch(err => console.log("Autoplay blocked:", err));
+      let vol = 0;
+      const fade = setInterval(() => {
+        if (vol < 1) {
+          vol += 0.05;
+          music.volume = vol;
+        } else {
+          clearInterval(fade);
+        }
+      }, 200);
+    }
+
+    function sayYes(){
+  playMusic();
+  confetti({ particleCount: 200, spread: 120, origin: { y: 0.6 } });
+  const message = encodeURIComponent("Yes! I’d truly love to 💕, with all my heart, today and always.");
+  setTimeout(() => {
+    window.location.href = https://wa.me/${phoneNumber}?text=${message};
+  }, 3000); // 3 sec delay so music/confetti can run
+}
+
+
+    function sayNo(){
+      playMusic();
+      const message = encodeURIComponent("I'm sorry, but I have to say no 💔. Still, thank you for asking.");
+      window.location.href = https://wa.me/${phoneNumber}?text=${message};
+    }
+
+    // Floating hearts animation
+    function createHeart(){
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (20 + Math.random() * 30) + "px";
+      heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+    setInterval(createHeart, 800);
+  </script>
+</body>
+</html>
